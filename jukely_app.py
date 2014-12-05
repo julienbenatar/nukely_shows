@@ -1,5 +1,6 @@
 from spyre import server
 
+import sys
 import pandas as pd
 import time
 from sets import Set
@@ -95,5 +96,17 @@ class JukelyApp(server.App):
 							)
 		return html
 
-app = JukelyApp()
-app.launch(host='0.0.0.0', port=9876)
+def main(host='local', port=8080):
+	app = JukelyApp()
+	app.launch(host=host, port=port)
+	
+if __name__ == "__main__":
+	print sys.argv
+	print sys
+	
+	if len(sys.argv)>2:
+		main(sys.argv[1], int(sys.argv[2]))
+	elif len(sys.argv)==2:
+		main(sys.argv[1])
+	else:
+		main()
